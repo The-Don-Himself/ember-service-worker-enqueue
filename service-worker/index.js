@@ -73,19 +73,19 @@ function sendInOrder(requests) {
                             return;
                         });
                     }
-                    let messageData = {
-                        url: request.url,
-                        response: response
-                    };
-                    let data = {
-                        enqueue: messageData
-                    };
-                    self.clients.matchAll().then(
-                        all => all.map(
-                            client => client.postMessage(JSON.stringify(data))
-                        )
-                    );
-                    return;
+                    return response.json().then(function(data) {
+                        let messageObject = {
+                            enqueue: true,
+                            url: request.url,
+                            json: data
+                        };
+                        self.clients.matchAll().then(
+                            all => all.map(
+                                client => client.postMessage(messageObject)
+                            )
+                        );
+                        return;
+                    });
                 }).catch(function(error) {
                     return enqueue(request).then(function() {
                         return;
