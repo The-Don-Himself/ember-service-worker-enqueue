@@ -75,14 +75,14 @@ function sendInOrder(requests) {
                     }
                     let messageData = {
                         url: request.url,
-                        response: response.clone()
+                        response: response
                     };
                     let data = {
                         enqueue: messageData
                     };
                     self.clients.matchAll().then(
                         all => all.map(
-                            client => client.postMessage(data)
+                            client => client.postMessage(JSON.stringify(data))
                         )
                     );
                     return;
