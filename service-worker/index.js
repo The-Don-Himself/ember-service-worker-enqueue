@@ -75,7 +75,7 @@ function sendInOrder(requests) {
                     }
                     let messageData = {
                         url: request.url,
-                        response: response
+                        response: response.clone()
                     };
                     let data = {
                         enqueue: messageData
