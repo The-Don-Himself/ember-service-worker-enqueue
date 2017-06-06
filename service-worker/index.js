@@ -79,12 +79,27 @@ function sendInOrder(requests) {
                             url: request.url,
                             json: data
                         };
-                        self.clients.matchAll().then(
-                            all => all.map(
-                                client => client.postMessage(messageObject)
-                            )
-                        );
-                        return;
+
+                        // Retrieve a list of the clients of this service worker.
+                        self.clients.matchAll().then(function(clientList) {
+                            // Check if there's at least one focused client.
+                            let focused = clientList.some(function(client) {
+                                return client.focused;
+                            });
+
+                            let notificationMessage;
+                            if (focused) {
+                                // We are on one tab with site open
+                                focused.postMessage(messageObject);
+                            } else if (clientList.length > 0) {
+                                // We have at least one tab open although not focused
+                                clientList[0].postMessage(messageObject);
+                            } else {
+                                // No tab open do nothing
+                            }
+
+                            return;
+                        });
                     });
                 }).catch(function(error) {
                     return enqueue(request).then(function() {
