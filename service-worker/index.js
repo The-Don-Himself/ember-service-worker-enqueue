@@ -185,7 +185,9 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('message', function(event) {
-    if(event.data === 'online'){
+    let message = event.data;
+    let online = message.online;
+    if(online){
         console.log('Network available! Flushing queue.');
         event.waitUntil(flushQueue());
     }
