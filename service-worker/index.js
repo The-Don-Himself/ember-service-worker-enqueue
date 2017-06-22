@@ -150,7 +150,7 @@ function fetchClone(request) {
     return serialize(request).then(function(serialized) {
         // modify serialized.body here to add your request parameter
         return deserialize(serialized).then(function(req) {
-            return fetch(req, { mode: 'no-cors'});
+            return fetch(req, { credentials: 'include' , mode: 'no-cors'});
         });
     });
 }
