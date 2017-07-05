@@ -125,7 +125,7 @@ function serialize(request) {
         headers: headers,
         method: request.method,
         mode: request.mode,
-        credentials: request.credentials,
+        credentials: 'include',
         cache: request.cache,
         redirect: request.redirect,
         referrer: request.referrer
