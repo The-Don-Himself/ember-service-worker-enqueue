@@ -124,9 +124,9 @@ function serialize(request) {
         url: request.url,
         headers: headers,
         method: request.method,
-        mode: request.mode,
-        credentials: 'include',
-        cache: request.cache,
+        mode: request.mode || 'no-cors',
+        credentials: request.credentials || 'include',
+        cache: request.cache || 'default',
         redirect: request.redirect,
         referrer: request.referrer
     };
@@ -150,7 +150,7 @@ function fetchClone(request) {
     return serialize(request).then(function(serialized) {
         // modify serialized.body here to add your request parameter
         return deserialize(serialized).then(function(req) {
-            return fetch(req, { credentials: 'include' , mode: 'no-cors'});
+            return fetch(req);
         });
     });
 }
