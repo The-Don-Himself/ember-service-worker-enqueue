@@ -1,10 +1,20 @@
 {
   "name": "ember-service-worker-enqueue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Ember Service Worker plugin that catches failed mutation requests e.g POST, PUT, DELETE and queues them for background processing.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "xo"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "prettier": "latest",
+    "xo": "latest"
+  },
+  "xo": {
+    "space": true,
+    "semicolon": true,
+    "extends": ".eslintrc.js"
   },
   "repository": {
     "type": "git",
